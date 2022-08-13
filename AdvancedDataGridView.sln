@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30804.86
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32804.467
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedDataGridView", "AdvancedDataGridView\AdvancedDataGridView.csproj", "{6EBA0A55-B390-4479-A564-58D46094998D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvancedDataGridView", "AdvancedDataGridView\AdvancedDataGridView.csproj", "{6EBA0A55-B390-4479-A564-58D46094998D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedDataGridViewSample", "AdvancedDataGridViewSample\AdvancedDataGridViewSample.csproj", "{FB1EC6B4-8A98-4FC4-9092-3F86E6B32D7C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvancedDataGridViewSample", "AdvancedDataGridViewSample\AdvancedDataGridViewSample.csproj", "{FB1EC6B4-8A98-4FC4-9092-3F86E6B32D7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADGV_MemoryLeakageTest", "ADGV_MemoryLeakageTest\ADGV_MemoryLeakageTest.csproj", "{52EED066-0099-44A4-BEA9-0C75F316423D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,18 @@ Global
 		{FB1EC6B4-8A98-4FC4-9092-3F86E6B32D7C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{FB1EC6B4-8A98-4FC4-9092-3F86E6B32D7C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{FB1EC6B4-8A98-4FC4-9092-3F86E6B32D7C}.Release|x86.ActiveCfg = Release|Any CPU
+		{52EED066-0099-44A4-BEA9-0C75F316423D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52EED066-0099-44A4-BEA9-0C75F316423D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52EED066-0099-44A4-BEA9-0C75F316423D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{52EED066-0099-44A4-BEA9-0C75F316423D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{52EED066-0099-44A4-BEA9-0C75F316423D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{52EED066-0099-44A4-BEA9-0C75F316423D}.Debug|x86.Build.0 = Debug|Any CPU
+		{52EED066-0099-44A4-BEA9-0C75F316423D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52EED066-0099-44A4-BEA9-0C75F316423D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52EED066-0099-44A4-BEA9-0C75F316423D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{52EED066-0099-44A4-BEA9-0C75F316423D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{52EED066-0099-44A4-BEA9-0C75F316423D}.Release|x86.ActiveCfg = Release|Any CPU
+		{52EED066-0099-44A4-BEA9-0C75F316423D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
