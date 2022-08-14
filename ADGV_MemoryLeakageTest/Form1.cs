@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Zuby.ADGV;
 
 namespace ADGV_MemoryLeakageTest
 {
@@ -16,6 +17,7 @@ namespace ADGV_MemoryLeakageTest
         DataTable dt_Test;
         private int column_count;
         private int row_count;
+       
         public Form1()
         {
             InitializeComponent();
@@ -28,14 +30,43 @@ namespace ADGV_MemoryLeakageTest
             row_count = Convert.ToInt32(nud_DataRows.Value);
             var maxCount = Convert.ToInt32(nud_MaxTestCount.Value);
             btn_StartTest.Enabled = false;
+            btn_StartTest2.Enabled = false;
             progressBar_TestCount.Value = 0;
             progressBar_TestCount.Step = 1;
             progressBar_TestCount.Maximum = maxCount;
-            var test_task = Task.Run(() => TestLoop(maxCount, adgv_test));
+            var test_task = Task.Run(() => TestLoop(maxCount, adgv_test, true));
             await Task.WhenAll(test_task);
             btn_StartTest.Enabled = true;
+            btn_StartTest2.Enabled = true;
+
         }
 
+        /// <summary>
+        /// This flow is to test don't set DatSource = null
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void btn_StartTest2_Click(object sender, EventArgs e)
+        {            
+            column_count = Convert.ToInt32(nud_Columns.Value);
+            row_count = Convert.ToInt32(nud_DataRows.Value);
+            var maxCount = Convert.ToInt32(nud_MaxTestCount.Value);
+            btn_StartTest.Enabled = false;
+            btn_StartTest2.Enabled = false;
+            progressBar_TestCount.Value = 0;
+            progressBar_TestCount.Step = 1;
+            progressBar_TestCount.Maximum = maxCount;
+            var test_task = Task.Run(() => TestLoop(maxCount, adgv_test2, false));
+            await Task.WhenAll(test_task);
+            btn_StartTest.Enabled = true;
+            btn_StartTest2.Enabled = true;
+        }
+        /// <summary>
+        /// Create dummy DataTable for memory test
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <param name="columnSize"></param>
+        /// <param name="rowSize"></param>
         private void construct_test_dt(ref DataTable dt, int columnSize, int rowSize)
         {
             dt = new DataTable();
@@ -55,7 +86,7 @@ namespace ADGV_MemoryLeakageTest
                 dt.Rows.Add(dr);
             }
         }
-        private void TestLoop(int maxCount, DataGridView dgv)
+        private void TestLoop(int maxCount, DataGridView dgv, bool assignNullToDataSource = false)
         {
             for (int i = 1; i <= maxCount; i++)
             {
@@ -68,13 +99,17 @@ namespace ADGV_MemoryLeakageTest
 
                         LB_Info.Text = $@"Testing {i}/{maxCount}/ MemoryUsage : {Math.Round(memory / (1024.0 * 1024.0), 2)} MB";
                         LB_Info.Refresh();
-                        dgv.DataSource = null;
+                        if (assignNullToDataSource)
+                        {
+                            dgv.DataSource = null;
+                        }
                         construct_test_dt(ref dt_Test, column_count, row_count);                        
 
                         BindingSource bs = new BindingSource() { DataSource = dt_Test };
-                        //dgv.ColumnHeadersVisible = false;
+                        dgv.ColumnHeadersVisible = false;//For shorten binding time
                         dgv.DataSource = bs;
-                        //dgv.ColumnHeadersVisible = true;
+                        dgv.Refresh();
+                        dgv.ColumnHeadersVisible = true;
 
                         memory = GC.GetTotalMemory(true);
                         Console.WriteLine($@"MemoryUsage : {Math.Round(memory / (1024.0 * 1024.0), 2)} MB");
@@ -98,6 +133,7 @@ namespace ADGV_MemoryLeakageTest
                 LB_Info.Text = $@"Test Complete";
             }));
 
-        }
+        }       
+      
     }
 }
