@@ -191,8 +191,9 @@ namespace Zuby.ADGV
         /// </summary>
         public AdvancedDataGridView()
         {
-            RightToLeft = RightToLeft.No;
+            RightToLeft = RightToLeft.No;          
         }
+     
 
         /// <summary>
         /// Handle the dispose methods
@@ -207,7 +208,7 @@ namespace Zuby.ADGV
                 {
                     cell.SortChanged -= Cell_SortChanged;
                     cell.FilterChanged -= Cell_FilterChanged;
-                    cell.FilterPopup -= Cell_FilterPopup;
+                    cell.FilterPopup -= Cell_FilterPopup;                 
                 }
             }
             //foreach (ColumnHeaderCell cell in _columnHeaderCellsToCleanEvents)
@@ -1195,7 +1196,7 @@ namespace Zuby.ADGV
             if (ColumnHeadersHeight < cell.MinimumSize.Height)
                 ColumnHeadersHeight = cell.MinimumSize.Height;
             e.Column.HeaderCell = cell;
-
+            
             base.OnColumnAdded(e);
         }
 
@@ -1216,7 +1217,9 @@ namespace Zuby.ADGV
                 cell.FilterChanged -= Cell_FilterChanged;
                 cell.FilterPopup -= Cell_FilterPopup;
                 cell.CleanEvents();
-                cell.MenuStrip.Dispose();
+                cell.MenuStrip.Dispose();                
+                cell.Dispose();
+                cell = null;
                 //_columnHeaderCellsToCleanEvents.Add(cell);
                 //_menuStripToDispose.Add(cell.MenuStrip);
             }

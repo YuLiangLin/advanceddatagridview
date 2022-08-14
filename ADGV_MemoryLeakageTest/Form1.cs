@@ -56,7 +56,23 @@ namespace ADGV_MemoryLeakageTest
             progressBar_TestCount.Value = 0;
             progressBar_TestCount.Step = 1;
             progressBar_TestCount.Maximum = maxCount;
-            var test_task = Task.Run(() => TestLoop(maxCount, adgv_test2, false));
+            var test_task = Task.Run(() => TestLoop(maxCount, adgv_test, false));
+            await Task.WhenAll(test_task);
+            btn_StartTest.Enabled = true;
+            btn_StartTest2.Enabled = true;
+        }
+
+        private async void btn_StartTest3_Click(object sender, EventArgs e)
+        {
+            column_count = Convert.ToInt32(nud_Columns.Value);
+            row_count = Convert.ToInt32(nud_DataRows.Value);
+            var maxCount = Convert.ToInt32(nud_MaxTestCount.Value);
+            btn_StartTest.Enabled = false;
+            btn_StartTest2.Enabled = false;
+            progressBar_TestCount.Value = 0;
+            progressBar_TestCount.Step = 1;
+            progressBar_TestCount.Maximum = maxCount;
+            var test_task = Task.Run(() => TestLoop(maxCount, dgv_Test, true));
             await Task.WhenAll(test_task);
             btn_StartTest.Enabled = true;
             btn_StartTest2.Enabled = true;
@@ -101,7 +117,9 @@ namespace ADGV_MemoryLeakageTest
                         LB_Info.Refresh();
                         if (assignNullToDataSource)
                         {
-                            dgv.DataSource = null;                           
+                            dgv.DataSource = null;
+                            GC.Collect();
+                            GC.WaitForPendingFinalizers();
                         }
                         if (dgv.GetType() == typeof(AdvancedDataGridView))
                         {
@@ -110,13 +128,14 @@ namespace ADGV_MemoryLeakageTest
                         construct_test_dt(ref dt_Test, column_count, row_count);                        
 
                         BindingSource bs = new BindingSource() { DataSource = dt_Test };
-                        dgv.ColumnHeadersVisible = false;//For shorten binding time
+                        dgv.ColumnHeadersVisible = false;//For shorten binding time                       
                         dgv.DataSource = bs;                        
                         dgv.ColumnHeadersVisible = true;
                         dgv.Refresh();
 
                         memory = GC.GetTotalMemory(true);
-                        Console.WriteLine($@"MemoryUsage : {Math.Round(memory / (1024.0 * 1024.0), 2)} MB");
+                        //Console.WriteLine($@"MemoryUsage : {Math.Round(memory / (1024.0 * 1024.0), 2)} MB");
+                        Console.WriteLine($@"MemoryUsage : {Math.Round(memory / (1024.0 ), 2)} kB");
 
                     }
                     catch (Exception ex)
@@ -137,7 +156,8 @@ namespace ADGV_MemoryLeakageTest
                 LB_Info.Text = $@"Test Complete";
             }));
 
-        }       
-      
+        }
+
+       
     }
 }
