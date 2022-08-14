@@ -101,15 +101,19 @@ namespace ADGV_MemoryLeakageTest
                         LB_Info.Refresh();
                         if (assignNullToDataSource)
                         {
-                            dgv.DataSource = null;
+                            dgv.DataSource = null;                           
+                        }
+                        if (dgv.GetType() == typeof(AdvancedDataGridView))
+                        {
+                            ((AdvancedDataGridView)dgv).FilterAndSortEnabled = false;
                         }
                         construct_test_dt(ref dt_Test, column_count, row_count);                        
 
                         BindingSource bs = new BindingSource() { DataSource = dt_Test };
                         dgv.ColumnHeadersVisible = false;//For shorten binding time
-                        dgv.DataSource = bs;
-                        dgv.Refresh();
+                        dgv.DataSource = bs;                        
                         dgv.ColumnHeadersVisible = true;
+                        dgv.Refresh();
 
                         memory = GC.GetTotalMemory(true);
                         Console.WriteLine($@"MemoryUsage : {Math.Round(memory / (1024.0 * 1024.0), 2)} MB");

@@ -171,8 +171,8 @@ namespace Zuby.ADGV
         private List<string> _sortOrderList = new List<string>();
         private List<string> _filterOrderList = new List<string>();
         private List<string> _filteredColumns = new List<string>();
-        private List<MenuStrip> _menuStripToDispose = new List<MenuStrip>();
-        private List<ColumnHeaderCell> _columnHeaderCellsToCleanEvents = new List<ColumnHeaderCell>();
+        //private List<MenuStrip> _menuStripToDispose = new List<MenuStrip>();
+        //private List<ColumnHeaderCell> _columnHeaderCellsToCleanEvents = new List<ColumnHeaderCell>();
 
         private bool _loadedFilter = false;
         private string _sortString = null;
@@ -210,14 +210,14 @@ namespace Zuby.ADGV
                     cell.FilterPopup -= Cell_FilterPopup;
                 }
             }
-            foreach (ColumnHeaderCell cell in _columnHeaderCellsToCleanEvents)
-            {
-                cell.CleanEvents();
-            }
-            foreach (MenuStrip menustrip in _menuStripToDispose)
-            {
-                menustrip.Dispose();
-            }
+            //foreach (ColumnHeaderCell cell in _columnHeaderCellsToCleanEvents)
+            //{
+            //    cell.CleanEvents();
+            //}
+            //foreach (MenuStrip menustrip in _menuStripToDispose)
+            //{
+            //    menustrip.Dispose();
+            //}
 
             base.OnHandleDestroyed(e);
         }
@@ -1215,9 +1215,10 @@ namespace Zuby.ADGV
                 cell.SortChanged -= Cell_SortChanged;
                 cell.FilterChanged -= Cell_FilterChanged;
                 cell.FilterPopup -= Cell_FilterPopup;
-
-                _columnHeaderCellsToCleanEvents.Add(cell);
-                _menuStripToDispose.Add(cell.MenuStrip);
+                cell.CleanEvents();
+                cell.MenuStrip.Dispose();
+                //_columnHeaderCellsToCleanEvents.Add(cell);
+                //_menuStripToDispose.Add(cell.MenuStrip);
             }
             base.OnColumnRemoved(e);
         }
