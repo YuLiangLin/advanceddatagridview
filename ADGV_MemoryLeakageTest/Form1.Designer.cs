@@ -39,19 +39,19 @@
             this.LB_Info = new System.Windows.Forms.Label();
             this.btn_StartTest2 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.adgv_test = new Zuby.ADGV.AdvancedDataGridView();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btn_StartTest3 = new System.Windows.Forms.Button();
             this.dgv_Test = new System.Windows.Forms.DataGridView();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.adgv_test = new Zuby.ADGV.AdvancedDataGridView();
+            this.btn_StartTest3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Columns)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_DataRows)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_MaxTestCount)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.adgv_test)).BeginInit();
-            this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Test)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.adgv_test)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_StartTest
@@ -92,7 +92,7 @@
             this.nud_Columns.TabIndex = 9;
             this.nud_Columns.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nud_Columns.Value = new decimal(new int[] {
-            1,
+            10,
             0,
             0,
             0});
@@ -125,7 +125,7 @@
             this.nud_DataRows.TabIndex = 7;
             this.nud_DataRows.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nud_DataRows.Value = new decimal(new int[] {
-            1,
+            100,
             0,
             0,
             0});
@@ -212,6 +212,37 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1108, 332);
             this.tableLayoutPanel1.TabIndex = 16;
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.dgv_Test);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Location = new System.Drawing.Point(557, 3);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(548, 326);
+            this.groupBox2.TabIndex = 18;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Test3 WinFormDGV";
+            // 
+            // dgv_Test
+            // 
+            this.dgv_Test.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_Test.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgv_Test.Location = new System.Drawing.Point(3, 25);
+            this.dgv_Test.Name = "dgv_Test";
+            this.dgv_Test.Size = new System.Drawing.Size(542, 298);
+            this.dgv_Test.TabIndex = 0;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.adgv_test);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Location = new System.Drawing.Point(3, 3);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(548, 326);
+            this.groupBox1.TabIndex = 17;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Test1,2 ADGV";
+            // 
             // adgv_test
             // 
             this.adgv_test.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -225,28 +256,6 @@
             this.adgv_test.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             this.adgv_test.TabIndex = 0;
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.adgv_test);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(3, 3);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(548, 326);
-            this.groupBox1.TabIndex = 17;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Test1,2 ADGV";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.dgv_Test);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(557, 3);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(548, 326);
-            this.groupBox2.TabIndex = 18;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Test3 WinFormDGV";
-            // 
             // btn_StartTest3
             // 
             this.btn_StartTest3.Location = new System.Drawing.Point(453, 12);
@@ -256,15 +265,6 @@
             this.btn_StartTest3.Text = "Test 3\r\n(WinFormDGV)";
             this.btn_StartTest3.UseVisualStyleBackColor = true;
             this.btn_StartTest3.Click += new System.EventHandler(this.btn_StartTest3_Click);
-            // 
-            // dgv_Test
-            // 
-            this.dgv_Test.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_Test.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgv_Test.Location = new System.Drawing.Point(3, 25);
-            this.dgv_Test.Name = "dgv_Test";
-            this.dgv_Test.Size = new System.Drawing.Size(542, 298);
-            this.dgv_Test.TabIndex = 0;
             // 
             // Form1
             // 
@@ -289,10 +289,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.nud_DataRows)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_MaxTestCount)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.adgv_test)).EndInit();
-            this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Test)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.adgv_test)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

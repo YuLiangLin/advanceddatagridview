@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -115,27 +116,37 @@ namespace ADGV_MemoryLeakageTest
 
                         LB_Info.Text = $@"Testing {i}/{maxCount}/ MemoryUsage : {Math.Round(memory / (1024.0 * 1024.0), 2)} MB";
                         LB_Info.Refresh();
+                        double time_assign_datasource_null_ms = 0;
+                        double time_assign_datasource_ms = 0;
+                        Stopwatch sw = new Stopwatch();
                         if (assignNullToDataSource)
                         {
+
+                            sw.Start();
                             dgv.DataSource = null;
-                            GC.Collect();
-                            GC.WaitForPendingFinalizers();
+                            sw.Stop();
+                            time_assign_datasource_null_ms = sw.ElapsedMilliseconds;
+                            //GC.Collect();
+                            //GC.WaitForPendingFinalizers();
                         }
                         if (dgv.GetType() == typeof(AdvancedDataGridView))
                         {
                             ((AdvancedDataGridView)dgv).FilterAndSortEnabled = false;
                         }
-                        construct_test_dt(ref dt_Test, column_count, row_count);                        
+                        construct_test_dt(ref dt_Test, column_count, row_count);
 
                         BindingSource bs = new BindingSource() { DataSource = dt_Test };
-                        dgv.ColumnHeadersVisible = false;//For shorten binding time                       
-                        dgv.DataSource = bs;                        
+                        dgv.ColumnHeadersVisible = false;//For shorten binding time
+                        sw.Restart();
+                        dgv.DataSource = bs;
+                        sw.Stop();
+                        time_assign_datasource_ms = sw.ElapsedMilliseconds;
                         dgv.ColumnHeadersVisible = true;
                         dgv.Refresh();
 
                         memory = GC.GetTotalMemory(true);
                         //Console.WriteLine($@"MemoryUsage : {Math.Round(memory / (1024.0 * 1024.0), 2)} MB");
-                        Console.WriteLine($@"MemoryUsage : {Math.Round(memory / (1024.0 ), 2)} kB");
+                        Console.WriteLine($@"MemoryUsage : {Math.Round(memory / (1024.0), 2)} kB, AssignNullToDataSourceTime : {Math.Round(time_assign_datasource_null_ms, 1)} ms, BindingDataSourceTime : {Math.Round(time_assign_datasource_ms, 1)}ms");
 
                     }
                     catch (Exception ex)
@@ -158,6 +169,6 @@ namespace ADGV_MemoryLeakageTest
 
         }
 
-       
+
     }
 }
